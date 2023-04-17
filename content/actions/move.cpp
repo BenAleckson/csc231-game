@@ -1,5 +1,24 @@
 #include "move.h"
 
-Result perform(Engine& engine) {
+#include <iostream>
+
+#include "actor.h"
+#include "engine.h"
+
+Move::Move(Vec direction) : direction(direction) {}
+
+Result Move::perform(Engine& engine) {
+    Vec position = actor->get_position() + direction;
+
+    Tile& tile = engine.dungeon.tiles(position);
+    if (tile.is_door()) {
+        return failure();
+    }
+
+    if (tile.is_wall()) {
+        return failure();
+    }
+
+    actor->move_to(position);
     return success();
 }

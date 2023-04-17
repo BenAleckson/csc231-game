@@ -16,3 +16,10 @@ if new positon is in the wall
     return failure()
 If new position is a door
     return alternative(OpenDoor{})
+
+## Actor
+```C++
+void change_direction(Vec);
+void move_to(Vec);
+void get_position(Vec);
+```
