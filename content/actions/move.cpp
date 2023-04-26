@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "OpenDoor.h"
 #include "actor.h"
 #include "engine.h"
 
@@ -13,7 +14,7 @@ Result Move::perform(Engine& engine) {
 
     Tile& tile = engine.dungeon.tiles(position);
     if (tile.is_door()) {
-        return failure();
+        return alternative(OpenDoor{position});
     }
 
     if (tile.is_wall()) {
