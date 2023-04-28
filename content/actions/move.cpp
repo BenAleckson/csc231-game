@@ -21,6 +21,10 @@ Result Move::perform(Engine& engine) {
         return failure();
     }
 
+    // if (tile.actor) {
+    //     return failure();
+    // }
+
     actor->move_to(position);
     return success();
 }

@@ -2,6 +2,7 @@
 
 #include "actor.h"
 #include "engine.h"
+#include "updatefov.h"
 
 Result CloseDoor::perform(Engine& engine) {
     // get postion of actor
@@ -19,6 +20,7 @@ Result CloseDoor::perform(Engine& engine) {
         }
     }
     if (closed_any_doors) {
+        engine.events.add(UpdateFOV{});
         return success();
     } else {
         return failure();
