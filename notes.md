@@ -23,3 +23,7 @@ void change_direction(Vec);
 void move_to(Vec);
 void get_position(Vec);
 ```
+
+## Animation
+(x,y) -> arctan2(x,y)
+-theta + 90 = angle

@@ -5,6 +5,7 @@
 #include "move.h"
 #include "none.h"
 #include "rest.h"
+#include "sword.h"
 
 namespace Heros {
 // REaction = std::function<std::unique_ptr<Action>()>
@@ -30,6 +31,6 @@ const std::unordered_map<std::string, Reaction> keybindings = {
 
 constexpr int default_speed{8};
 const HeroType nobody{
-    "knight", default_speed, 1, std::make_shared<None>(), {keybindings}};
+    "knight", default_speed, 100, std::make_shared<Sword>(10), {keybindings}};
 
 }  // namespace Heros

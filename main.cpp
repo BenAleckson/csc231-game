@@ -11,6 +11,7 @@ int main() {
         engine.create_monster(Monsters::goblin());
         engine.create_monster(Monsters::zombie_big());
         engine.create_monster(Monsters::muddy());
+        engine.create_monster(Monsters::necromancer());
     }
 
     engine.create_hero(Heros::nobody);
