@@ -10,7 +10,7 @@ int main() {
     for (int i{0}; i < 5; ++i) {
         engine.create_monster(Monsters::goblin());
         engine.create_monster(Monsters::zombie_big());
-        engine.create_monster(Monsters::muddy());
+        engine.create_monster(Monsters::orc());
         engine.create_monster(Monsters::necromancer());
     }
 

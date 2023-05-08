@@ -8,6 +8,6 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me);
 
 MonsterType goblin();
 MonsterType zombie_big();
-MonsterType muddy();
+MonsterType orc();
 MonsterType necromancer();
 }  // namespace Monsters
