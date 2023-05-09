@@ -8,7 +8,7 @@
 constexpr int duration = 10;
 
 Swing::Swing(Sprite& sprite, Vec direction, Actor& defender, int damage)
-    : Event{10},
+    : Event{3},
       sprite{sprite},
       copy{sprite},
       defender{defender},

@@ -5,7 +5,7 @@
 #include "vec.h"
 
 Thrust::Thrust(Sprite& sprite, Vec direction, Actor& defender, int damage)
-    : Event{10},
+    : Event{3},
       sprite{sprite},
       original{sprite},
       direction{direction},
