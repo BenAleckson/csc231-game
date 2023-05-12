@@ -102,7 +102,7 @@ MonsterType necromancer() {
 
 MonsterType demon_tiny() {
     int health = 1;
-    return {"demon_tiny", default_speed, health, std::make_shared<Explode>(3),
+    return {"demon_tiny", 16, health, std::make_shared<Explode>(3),
             default_behavior};
 }
 }  // namespace Monsters
