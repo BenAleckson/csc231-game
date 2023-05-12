@@ -23,5 +23,4 @@ void Summon::execute(Engine&) {
 
 void Summon::when_done(Engine& engine) {
     sprite = original;
-    engine.events.add(Hit(defender, damage));
 }

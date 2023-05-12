@@ -1,13 +1,13 @@
 #pragma once
 
-#include "vec.h"
-#include "sprite.h"
 #include <memory>
+
+#include "sprite.h"
+#include "vec.h"
 
 // forward declarations
 class Engine;
 class Action;
-
 
 // base class for all interacting beings
 class Actor {
@@ -22,7 +22,7 @@ public:
 
     void take_damage(int amount);
     virtual void attack(Actor& defender) = 0;
-    
+
     virtual void update() = 0;
     virtual std::unique_ptr<Action> take_turn() = 0;
     virtual std::vector<Sprite> get_sprites() const = 0;
@@ -36,7 +36,6 @@ public:
     int health, max_health;
     bool alive;
 
-    
     // teams can be used to determine who can attack whom
     int team;
 
@@ -44,4 +43,3 @@ public:
     // it can take a turn
     int speed, energy;
 };
-
