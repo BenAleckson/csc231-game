@@ -1,20 +1,20 @@
 #include "engine.h"
-#include "builder.h"
-#include "decorator.h"
-#include "timer.h"
-#include "settings.h"
-#include "monster.h"
 
 #include <fstream>
-#include <unordered_map>
-#include <sstream>
 #include <iomanip>
+#include <sstream>
+#include <unordered_map>
 
+#include "builder.h"
+#include "decorator.h"
+#include "monster.h"
+#include "settings.h"
+#include "timer.h"
 
 Engine::Engine(const Settings& settings)
-    :graphics{settings.title, settings.screen_width, settings.screen_height},
-     camera{graphics, settings.tilesize, settings.zoom}, running{false} {
-
+    : graphics{settings.title, settings.screen_width, settings.screen_height},
+      camera{graphics, settings.tilesize, settings.zoom},
+      running{false} {
     // load sprites
     graphics.load_spritesheet(settings.tiles);
     graphics.load_spritesheet(settings.heros);
@@ -22,10 +22,11 @@ Engine::Engine(const Settings& settings)
     graphics.load_spritesheet(settings.weapons);
     graphics.load_spritesheet(settings.items);
     graphics.load_spritesheet(settings.effects);
-    
+
     // create dungeon layout
     Builder builder(settings.room_placement_attempts);
-    auto [layout, rooms] = builder.generate(settings.map_width, settings.map_height);
+    auto [layout, rooms] =
+        builder.generate(settings.map_width, settings.map_height);
 
     // assign sprites to dungeon tiles
     Decorator decorator(graphics, layout, rooms);
@@ -42,7 +43,7 @@ void Engine::run() {
     while (running && hero->alive) {
         // handling input and rendering produce time, whereas the
         // update loop consumes time in fixed steps
-        accumulated_time += timer.elapsed(); 
+        accumulated_time += timer.elapsed();
 
         handle_input();
 
@@ -75,15 +76,14 @@ void Engine::create_monster(const MonsterType& type) {
 void Engine::handle_input() {
     auto inputs = input.get_input();
     for (const auto& i : inputs) {
-        if (i == "Quit") { // close of game window
+        if (i == "Quit") {  // close of game window
             running = false;
             break;
         }
         // handle change to camera zoom
         else if (i == "-") {
             camera.zoom_out();
-        }
-        else if (i == "=") { // also handles + key
+        } else if (i == "=") {  // also handles + key
             camera.zoom_in();
         }
         // otherwise pass the key onto the hero who may react to it
@@ -95,7 +95,7 @@ void Engine::handle_input() {
 
 void Engine::update() {
     camera.update();
-    
+
     // update all dungeon tiles, mostly updating animate sprites
     dungeon.update();
 
@@ -122,4 +122,3 @@ void Engine::render() {
     }
     graphics.redraw();
 }
-

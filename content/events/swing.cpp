@@ -12,7 +12,8 @@ Swing::Swing(Sprite& sprite, Vec direction, Actor& defender, int damage)
       sprite{sprite},
       copy{sprite},
       defender{defender},
-      damage{damage} {
+      damage{damage},
+      starting_angle{sprite.angle} {
     if (direction == Vec{1, 0}) {
         starting_angle = 0;
         delta_angle = 135.0 / (duration - 1);
