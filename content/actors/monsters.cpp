@@ -10,6 +10,7 @@
 #include "randomness.h"
 #include "rest.h"
 #include "staff_red.h"
+#include "summon.h"
 #include "sword.h"
 #include "wander.h"
 
@@ -42,9 +43,11 @@ std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
         for (Vec neighbor : neighbors) {
             //  if tile is door
             Tile& tile = engine.dungeon.tiles(neighbor);
-            if (!(tile.is_door() || tile.is_wall())) {
-                auto monster = std::make_shared<Monster>(engine, me, neighbor);
+            if (tile.is_door() && tile.is_wall() && tile.actor) {
+                auto monster = std::make_shared<Monster>(
+                    engine, Monsters::demon_tiny(), neighbor);
                 engine.actors.add(monster);
+                me.minions.push_back(monster);
             }
         }
     }
@@ -92,7 +95,7 @@ MonsterType necromancer() {
 
 MonsterType demon_tiny() {
     int health = 1;
-    return {"demon_tiny", 4, health, std::make_shared<Explode>(3),
+    return {"demon_tiny", default_speed, health, std::make_shared<Explode>(3),
             default_behavior};
 }
 }  // namespace Monsters
