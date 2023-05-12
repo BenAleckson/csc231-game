@@ -58,7 +58,13 @@ std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
             me.get_position(), engine.hero->get_position());
         if (path.size() > 1) {
             Vec direction = -1 * (path.at(1) - path.at(0));
-            return std::make_unique<Move>(direction);
+            Vec position = me.get_position() + direction;
+            Tile& tile = engine.dungeon.tiles(position);
+            if (!tile.is_door() && !tile.is_wall() && !tile.actor) {
+                return std::make_unique<Move>(direction);
+            } else {
+                return std::make_unique<Rest>();
+            }
         }
     }
 
