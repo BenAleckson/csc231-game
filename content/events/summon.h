@@ -8,7 +8,7 @@ class Actor;
 
 class Summon : public Event {
 public:
-    Summon(Sprite& sprite, Vec direction, Actor& defender, int damage);
+    Summon(Sprite& sprite, Vec direction);
     void execute(Engine&) override;
     void when_done(Engine& engine) override;
 
@@ -16,6 +16,4 @@ private:
     Sprite& sprite;
     Sprite original;
     Vec direction;
-    Actor& defender;
-    int damage;
 };

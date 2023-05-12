@@ -33,6 +33,9 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
 }
 
 std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
+    auto it = std::remove_if(std::begin(me.minions), std::end(me.minions),
+                             [](const auto& actor) { return !actor->alive; });
+    me.minions.erase(it, std::end(me.minions));
     if (me.is_visible() && me.minions.size() == 0) {
         std::vector<Vec> neighbors =
             engine.dungeon.neighbors(me.get_position());
@@ -40,8 +43,8 @@ std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
             //  if tile is door
             Tile& tile = engine.dungeon.tiles(neighbor);
             if (!(tile.is_door() || tile.is_wall())) {
-                auto monster = std::make_shared<Monster>(*this, me, neighbor);
-                actors.add(monster);
+                auto monster = std::make_shared<Monster>(engine, me, neighbor);
+                engine.actors.add(monster);
             }
         }
     }

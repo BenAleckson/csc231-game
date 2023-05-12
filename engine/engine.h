@@ -1,15 +1,15 @@
 #pragma once
 
-#include "graphics.h"
-#include "input.h"
+#include "actors.h"
 #include "camera.h"
 #include "dungeon.h"
-#include "actors.h"
-#include "hero.h"
-#include "monstertype.h"
 #include "events.h"
+#include "graphics.h"
+#include "hero.h"
+#include "input.h"
+#include "monstertype.h"
 #include "settings.h"
-    
+
 class Engine {
 public:
     Engine(const Settings& settings);
@@ -25,20 +25,18 @@ public:
 
     // access to engine components
     Graphics graphics;
-    Camera camera;     
+    Camera camera;
     Dungeon dungeon;
     Events events;
     std::shared_ptr<Hero> hero;
-    
+    Actors actors;  // manages actors and when they can take their turn
+
 private:
     bool running;
     void handle_input();
     void update();
     void render();
 
-    Input input;   // handles button presses and mouse clicks
-    Actors actors; // manages actors and when they can take their turn
+    Input input;  // handles button presses and mouse clicks
 public:
-
 };
-

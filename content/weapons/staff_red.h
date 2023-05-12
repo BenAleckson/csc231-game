@@ -4,6 +4,6 @@
 
 class Staff_Red : public Weapon {
 public:
-    Staff_Red(int damage);
+    Staff_Red();
     void use(Engine& engine, Actor& attacker, Actor& defender) override;
 };
