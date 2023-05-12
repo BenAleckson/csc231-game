@@ -2,8 +2,8 @@
 
 #include "axe.h"
 #include "engine.h"
+#include "explode.h"
 #include "hammer_big.h"
-#include "lightning.h"
 #include "monster.h"
 #include "move.h"
 #include "none.h"
@@ -40,10 +40,8 @@ std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
             //  if tile is door
             Tile& tile = engine.dungeon.tiles(neighbor);
             if (!(tile.is_door() || tile.is_wall())) {
-                auto monster = std::make_shared<Monster>(
-                    *this, Monsters::demon_tiny(), tile);
+                auto monster = std::make_shared<Monster>(*this, me, neighbor);
                 actors.add(monster);
-                me.minions.push_back(monster);
             }
         }
     }
@@ -86,12 +84,12 @@ MonsterType orc() {
 MonsterType necromancer() {
     int health = 1;
     return {"necromancer", default_speed, health,
-            std::make_shared<Staff_Red>(1), default_behavior};
+            std::make_shared<Staff_Red>(1), necromancer_behavior};
 }
 
 MonsterType demon_tiny() {
     int health = 1;
-    return {"demon_tiny", 4, health, std::make_shared<Lightning>(1),
+    return {"demon_tiny", 4, health, std::make_shared<Explode>(3),
             default_behavior};
 }
 }  // namespace Monsters

@@ -21,6 +21,6 @@ void Summon::execute(Engine&) {
     sprite.shift += direction * 1;
 }
 
-void Summon::when_done(Engine& engine) {
+void Summon::when_done(Engine&) {
     sprite = original;
 }
