@@ -43,7 +43,7 @@ std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
         for (Vec neighbor : neighbors) {
             //  if tile is door
             Tile& tile = engine.dungeon.tiles(neighbor);
-            if (tile.is_door() && tile.is_wall() && tile.actor) {
+            if (!tile.is_door() && !tile.is_wall() && !tile.actor) {
                 auto monster = std::make_shared<Monster>(
                     engine, Monsters::demon_tiny(), neighbor);
                 engine.actors.add(monster);

@@ -15,8 +15,10 @@ Result Move::perform(Engine& engine) {
     actor->change_direction(direction);
 
     Tile& tile = engine.dungeon.tiles(position);
-    if (tile.actor) {
+    if (tile.actor && tile.actor->team != actor->team) {
         return alternative(Attack(*tile.actor));
+    } else if (tile.actor && tile.actor->team == actor->team) {
+        return alternative(Rest{});
     }
     if (tile.is_door()) {
         return alternative(OpenDoor{position});
