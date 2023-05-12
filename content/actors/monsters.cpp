@@ -50,9 +50,10 @@ std::unique_ptr<Action> necromancer_behavior(Engine& engine, Monster& me) {
                 me.minions.push_back(monster);
             }
         }
+        return std::make_unique<Rest>();
     }
     // default behavior when not spawning monsters
-    if (me.is_visible() && engine.hero) {
+    else if (me.is_visible() && engine.hero) {
         std::vector<Vec> path = engine.dungeon.calculate_path(
             me.get_position(), engine.hero->get_position());
         if (path.size() > 1) {
